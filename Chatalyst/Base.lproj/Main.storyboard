@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VqR-Ep-hKl">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SolomonSans-Bold.otf">
+            <string>Solomon-Sans-Bold</string>
+            <string>Solomon-Sans-Bold</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Chatalyst" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +23,126 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AcQ-A5-KGJ">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.0039215686274509803" green="0.80784313725490198" blue="0.99215686274509807" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Solomon-Sans-Bold" family="Solomon Sans Bold" pointSize="24"/>
+                                <state key="normal" title="Batman">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="abheyrajTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rmp-fQ-BvE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9uc-Kc-Hkq">
+                                <rect key="frame" x="0.0" y="300" width="600" height="300"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.65098039220000004" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="Solomon-Sans-Bold" family="Solomon Sans Bold" pointSize="24"/>
+                                <state key="normal" title="Robin">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="vibhasTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NUG-k7-2Zi"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9uc-Kc-Hkq" firstAttribute="height" secondItem="AcQ-A5-KGJ" secondAttribute="height" id="7JR-M0-hMP"/>
+                            <constraint firstAttribute="trailing" secondItem="AcQ-A5-KGJ" secondAttribute="trailing" id="DFe-pq-FrX"/>
+                            <constraint firstItem="AcQ-A5-KGJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="M47-Jr-tK0"/>
+                            <constraint firstAttribute="trailing" secondItem="9uc-Kc-Hkq" secondAttribute="trailing" id="MAk-ax-LQZ"/>
+                            <constraint firstItem="9uc-Kc-Hkq" firstAttribute="top" secondItem="AcQ-A5-KGJ" secondAttribute="bottom" id="N0A-sU-wfU"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9uc-Kc-Hkq" secondAttribute="bottom" id="Uob-uM-Pb8"/>
+                            <constraint firstItem="9uc-Kc-Hkq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Y5f-Io-8ce"/>
+                            <constraint firstItem="AcQ-A5-KGJ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="lIy-zZ-sDK"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="MxX-fj-8Jm"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <segue destination="rxh-b4-8xG" kind="show" identifier="showConversation" id="kru-BY-4Kg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1094" y="915"/>
+        </scene>
+        <!--Conversation View Controller-->
+        <scene sceneID="Ef5-Zt-vTk">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="rxh-b4-8xG" customClass="ConversationViewController" customModule="Chatalyst" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rif-qd-Sq5"/>
+                        <viewControllerLayoutGuide type="bottom" id="j50-aY-7JK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GEm-Uj-tUb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wZ-8N-H5b">
+                                <rect key="frame" x="0.0" y="102" width="600" height="498"/>
+                                <animations/>
+                            </scrollView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jPW-GG-fF8">
+                                <rect key="frame" x="0.0" y="52" width="600" height="50"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="new-Jd-KOh"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jPW-GG-fF8" firstAttribute="top" secondItem="rif-qd-Sq5" secondAttribute="bottom" constant="32" id="5q1-sJ-Qwu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="jPW-GG-fF8" secondAttribute="trailing" constant="-20" id="7qL-Hj-5sS"/>
+                            <constraint firstAttribute="trailing" secondItem="6wZ-8N-H5b" secondAttribute="trailing" id="E0M-Nt-lkG"/>
+                            <constraint firstItem="jPW-GG-fF8" firstAttribute="leading" secondItem="GEm-Uj-tUb" secondAttribute="leadingMargin" constant="-20" id="GLA-Y4-d2z"/>
+                            <constraint firstItem="6wZ-8N-H5b" firstAttribute="leading" secondItem="GEm-Uj-tUb" secondAttribute="leading" id="OTp-nC-oTS"/>
+                            <constraint firstItem="jPW-GG-fF8" firstAttribute="leading" secondItem="GEm-Uj-tUb" secondAttribute="leading" id="QPx-Y8-4Ti"/>
+                            <constraint firstItem="6wZ-8N-H5b" firstAttribute="top" secondItem="jPW-GG-fF8" secondAttribute="bottom" id="TBg-9i-kZM"/>
+                            <constraint firstAttribute="trailing" secondItem="jPW-GG-fF8" secondAttribute="trailing" id="Yh9-ew-8Wo"/>
+                            <constraint firstItem="j50-aY-7JK" firstAttribute="top" secondItem="6wZ-8N-H5b" secondAttribute="bottom" id="zNz-SN-fTw"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="7qL-Hj-5sS"/>
+                                <exclude reference="GLA-Y4-d2z"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="chatIndicator" destination="jPW-GG-fF8" id="liB-nC-Ks0"/>
+                        <outlet property="conversationsContainer" destination="6wZ-8N-H5b" id="ZSr-xs-hF0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vuJ-Db-1qd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1841" y="915"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="u6Q-6a-CHP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VqR-Ep-hKl" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fhv-cs-pA0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="z25-gv-fwK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h1r-JY-K9s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="282" y="915"/>
         </scene>
     </scenes>
 </document>

@@ -8,14 +8,18 @@
 
 import UIKit
 
+let AppId = "layer:///apps/staging/b493e0a0-94f1-11e5-83e2-3a8a16005a40"
+let userIDBatman = "Batman"
+let userIDRobin = "Robin"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
         return true
     }
 
