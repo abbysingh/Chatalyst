@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Parse
+import Bolts
 
 let AppId = "layer:///apps/staging/b493e0a0-94f1-11e5-83e2-3a8a16005a40"
 let userIDBatman = "Batman"
@@ -18,11 +20,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        // [Optional] Power your app with Local Datastore. For more info, go to
+        // https://parse.com/docs/ios_guide#localdatastore/iOS
+        Parse.enableLocalDatastore()
         
+        // Initialize Parse.
+        Parse.setApplicationId("mrZ1LgoMiAVgK8jbLMLb1MNQCZnba4glAGWCTgTd",
+            clientKey: "QvS3OgWmp5qUbK68EG1f2OSZQBsotOalRaVtkBhv")
+        
+        // [Optional] Track statistics around application opens.
+        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        
+        // ...
         return true
     }
-
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

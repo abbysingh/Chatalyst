@@ -7,25 +7,61 @@
 //
 
 import UIKit
-
+import Parse
 class ViewController: UIViewController {
 
     var currentUser:String?
     var participantUser:String?
-    
-    override func viewDidLoad() {
+    let password = "asdfghjkl"
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
+//        let query = PFQuery(className: "Message")
+//        query.findObjectsInBackgroundWithBlock
+//        { (messages, error) -> Void in
+//            print(messages)
+//            let threadQuery = PFQuery(className: "Thread")
+//            threadQuery.findObjectsInBackgroundWithBlock({ (threads, error) -> Void in
+//                let mainThread = threads![0]
+//                mainThread["messages"] = messages
+//                mainThread.saveInBackground()
+//            })
+//            
+//        }
+//        
+        let threadQuery = PFQuery(className: "Thread")
+        threadQuery.findObjectsInBackgroundWithBlock({ (threads, error) -> Void in
+            let mainThread = threads![0]
+            print(mainThread["messages"])
+            PFObject.fetchAllIfNeededInBackground(mainThread["messages"] as? [PFObject], block:
+            { (messages, error) -> Void in
+                
+                for message in messages!
+                {
+                    print(message["messageString"])
+                }
+            })
+        })
+
+        
+        
     }
 
     @IBAction func abheyrajTapped(sender: AnyObject) {
         currentUser = "Batman"
         participantUser = "Robin"
+        PFUser.logInWithUsernameInBackground(currentUser!, password: password) { (user, error) -> Void in
+            print(self.currentUser! + "logged in")
+        }
         performSegueWithIdentifier("showConversation", sender: nil)
     }
     
     @IBAction func vibhasTapped(sender: AnyObject) {
         currentUser = "Robin"
         participantUser = "Batman"
+        PFUser.logInWithUsernameInBackground(currentUser!, password: password) { (user, error) -> Void in
+            print(self.currentUser! + "logged in")
+        }
         performSegueWithIdentifier("showConversation", sender: nil)
     }
 

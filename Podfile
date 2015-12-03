@@ -7,4 +7,5 @@ target 'Chatalyst' do
   pod 'LayerKit'
   pod 'JSQMessagesViewController'
   pod 'Atlas'
+  pod 'Parse'
 end
