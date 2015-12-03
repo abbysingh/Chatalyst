@@ -8,7 +8,7 @@
 
 import UIKit
 import LayerKit
-
+import Parse
 class ConversationViewController: UIViewController, LYRClientDelegate {
     
     var layerClient: LYRClient?
@@ -21,27 +21,36 @@ class ConversationViewController: UIViewController, LYRClientDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        layerClient = LYRClient(appID: NSURL(string: AppId))
-        layerClient?.delegate = self
-        layerClient?.connectWithCompletion({ (success, error) -> Void in
-            if(!success){
-                UIAlertView(title: "Chatalyst", message: "Could not connect to layer", delegate: self, cancelButtonTitle: "Okay").show()
-            }else{
-                self.authenticateLayerWithUserId(self.userID!, completion: { (success, error) -> Void in
-                    if(!success){
-                        print("Failed to authenticate with error \(error)")
-                    }
-                    self.initializeConversationView()
-                    do{
-                        self.defaultConversation = try self.layerClient?.newConversationWithParticipants(Set(arrayLiteral: self.userID!, self.participantID!), options: nil)
-                        
-                    }catch let conversationError {
-                        print(conversationError)
-                    }
-                })
+        let threadQuery = PFQuery(className: "Thread")
+        threadQuery.findObjectsInBackgroundWithBlock { (threads, error) -> Void in
+            self.createViewControllers(threads!)
+        }
+    }
+    
+    func createViewControllers(threads:[PFObject])
+    {
+        var i=CGFloat(0)
+        for thread in threads
+        {
+            if let chatController = storyboard?.instantiateViewControllerWithIdentifier("ChatViewController") as? ChatViewController
+            {
+                
+                chatController.thread = thread
+                //            chatController.conversation = defaultConversation
+                //            self.navigationController?.pushViewController(chatController, animated: true)
+                chatController.view.bounds = conversationsContainer.bounds
+                var frame = chatController.view.frame
+                frame.origin.x = 0+i*view.frame.width
+                frame.origin.y = 0
+                frame.size.width = conversationsContainer.frame.width
+                frame.size.height = conversationsContainer.frame.size.height
+                chatController.view.frame = frame
+                chatControllers.append(chatController)
+                conversationsContainer.addSubview(chatController.view)
             }
-        })
-        
+            
+            i+=1
+        }
     }
     
     override func viewWillAppear(animated: Bool) {

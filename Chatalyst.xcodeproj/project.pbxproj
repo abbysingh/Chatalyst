@@ -17,6 +17,8 @@
 		42A0AF021C1029E3005D18AA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A0AEF81C1029E3005D18AA /* Security.framework */; };
 		42A0AF031C1029E3005D18AA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A0AEF91C1029E3005D18AA /* StoreKit.framework */; };
 		42A0AF041C1029E3005D18AA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A0AEFA1C1029E3005D18AA /* SystemConfiguration.framework */; };
+		42A0AF071C105831005D18AA /* LeftCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0AF061C105831005D18AA /* LeftCell.swift */; };
+		42A0AF091C105843005D18AA /* RightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A0AF081C105843005D18AA /* RightCell.swift */; };
 		D51857B21C0D966D003E9396 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51857B11C0D966D003E9396 /* AppDelegate.swift */; };
 		D51857B41C0D966D003E9396 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51857B31C0D966D003E9396 /* ViewController.swift */; };
 		D51857B71C0D966D003E9396 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D51857B51C0D966D003E9396 /* Main.storyboard */; };
@@ -43,6 +45,8 @@
 		42A0AEF81C1029E3005D18AA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		42A0AEF91C1029E3005D18AA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		42A0AEFA1C1029E3005D18AA /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		42A0AF061C105831005D18AA /* LeftCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftCell.swift; sourceTree = "<group>"; };
+		42A0AF081C105843005D18AA /* RightCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightCell.swift; sourceTree = "<group>"; };
 		AEB4FF57B750576DB113FB57 /* Pods-Chatalyst.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatalyst.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chatalyst/Pods-Chatalyst.release.xcconfig"; sourceTree = "<group>"; };
 		C8FCA6D527F3C539860F0870 /* Pods_Chatalyst.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chatalyst.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D51857AE1C0D966D003E9396 /* Chatalyst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chatalyst.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +88,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		42A0AF051C105816005D18AA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				42A0AF061C105831005D18AA /* LeftCell.swift */,
+				42A0AF081C105843005D18AA /* RightCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		AF44AD3F8C6B838C3C601202 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +127,7 @@
 		D51857B01C0D966D003E9396 /* Chatalyst */ = {
 			isa = PBXGroup;
 			children = (
+				42A0AF051C105816005D18AA /* Views */,
 				D51857D11C0DC842003E9396 /* ViewControllers */,
 				D51857C31C0DA58C003E9396 /* Assets */,
 				D51857B11C0D966D003E9396 /* AppDelegate.swift */,
@@ -291,10 +305,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42A0AF071C105831005D18AA /* LeftCell.swift in Sources */,
 				D51857D31C0DD952003E9396 /* ChatParticipant.swift in Sources */,
 				D51857B41C0D966D003E9396 /* ViewController.swift in Sources */,
 				D51857B21C0D966D003E9396 /* AppDelegate.swift in Sources */,
 				D51857D01C0DC78C003E9396 /* ChatViewController.swift in Sources */,
+				42A0AF091C105843005D18AA /* RightCell.swift in Sources */,
 				D51857CD1C0DA78E003E9396 /* ConversationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

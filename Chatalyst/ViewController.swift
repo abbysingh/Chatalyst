@@ -16,42 +16,33 @@ class ViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-//        let query = PFQuery(className: "Message")
-//        query.findObjectsInBackgroundWithBlock
-//        { (messages, error) -> Void in
-//            print(messages)
-//            let threadQuery = PFQuery(className: "Thread")
-//            threadQuery.findObjectsInBackgroundWithBlock({ (threads, error) -> Void in
-//                let mainThread = threads![0]
-//                mainThread["messages"] = messages
-//                mainThread.saveInBackground()
-//            })
-//            
-//        }
-//        
-        let threadQuery = PFQuery(className: "Thread")
-        threadQuery.findObjectsInBackgroundWithBlock({ (threads, error) -> Void in
-            let mainThread = threads![0]
-            print(mainThread["messages"])
-            PFObject.fetchAllIfNeededInBackground(mainThread["messages"] as? [PFObject], block:
-            { (messages, error) -> Void in
-                
+        let query = PFQuery(className: "Message")
+        query.findObjectsInBackgroundWithBlock
+        { (messages, error) -> Void in
+            print(messages)
+            let threadQuery = PFQuery(className: "Thread")
+            threadQuery.findObjectsInBackgroundWithBlock({ (threads, error) -> Void in
+                let mainThread = threads![0]
                 for message in messages!
                 {
-                    print(message["messageString"])
+                    let relation = message.relationForKey("thread")
+                    relation.addObject(mainThread)
+                    message.saveInBackground()
                 }
+                
             })
-        })
-
+            
+        }
         
-        
-    }
+}
 
     @IBAction func abheyrajTapped(sender: AnyObject) {
         currentUser = "Batman"
         participantUser = "Robin"
-        PFUser.logInWithUsernameInBackground(currentUser!, password: password) { (user, error) -> Void in
-            print(self.currentUser! + "logged in")
+        if(PFUser.currentUser() == nil){
+            PFUser.logInWithUsernameInBackground(currentUser!, password: password) { (user, error) -> Void in
+                print(self.currentUser! + "logged in")
+            }
         }
         performSegueWithIdentifier("showConversation", sender: nil)
     }
@@ -59,8 +50,10 @@ class ViewController: UIViewController {
     @IBAction func vibhasTapped(sender: AnyObject) {
         currentUser = "Robin"
         participantUser = "Batman"
-        PFUser.logInWithUsernameInBackground(currentUser!, password: password) { (user, error) -> Void in
-            print(self.currentUser! + "logged in")
+        if(PFUser.currentUser() == nil){
+            PFUser.logInWithUsernameInBackground(currentUser!, password: password) { (user, error) -> Void in
+                print(self.currentUser! + "logged in")
+            }
         }
         performSegueWithIdentifier("showConversation", sender: nil)
     }
