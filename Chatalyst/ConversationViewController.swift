@@ -31,9 +31,10 @@ class ConversationViewController: UIViewController, LYRClientDelegate {
                     if(!success){
                         print("Failed to authenticate with error \(error)")
                     }
+                    self.initializeConversationView()
                     do{
                         self.defaultConversation = try self.layerClient?.newConversationWithParticipants(Set(arrayLiteral: self.userID!, self.participantID!), options: nil)
-                        self.initializeConversationView()
+                        
                     }catch let conversationError {
                         print(conversationError)
                     }
@@ -52,19 +53,21 @@ class ConversationViewController: UIViewController, LYRClientDelegate {
     }
     
     func initializeConversationView(){
-        let chatController = ChatViewController()
-        chatController.layerClient = self.layerClient
-        chatController.conversation = defaultConversation
-        self.navigationController?.pushViewController(chatController, animated: true)
-//        chatController.view.bounds = conversationsContainer.bounds
-//        var frame = chatController.view.frame
-//        frame.origin.x = 0
-//        frame.origin.y = 0
-//        frame.size.width = conversationsContainer.frame.width
-//        frame.size.height = conversationsContainer.frame.size.height
-//        chatController.view.frame = frame
-//        chatControllers.append(chatController)
-//        conversationsContainer.addSubview(chatController.view)
+        if let chatController = storyboard?.instantiateViewControllerWithIdentifier("ChatViewController") as? ChatViewController
+        {
+            chatController.layerClient = self.layerClient
+//            chatController.conversation = defaultConversation
+//            self.navigationController?.pushViewController(chatController, animated: true)
+            chatController.view.bounds = conversationsContainer.bounds
+            var frame = chatController.view.frame
+            frame.origin.x = 0
+            frame.origin.y = 0
+            frame.size.width = conversationsContainer.frame.width
+            frame.size.height = conversationsContainer.frame.size.height
+            chatController.view.frame = frame
+            chatControllers.append(chatController)
+            conversationsContainer.addSubview(chatController.view)
+        }
     }
     
     
