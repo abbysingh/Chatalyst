@@ -7,14 +7,16 @@
 //
 
 import UIKit
-import Atlas
+import LayerKit
 
-class ChatViewController: ATLConversationViewController, ATLConversationViewControllerDataSource, ATLConversationViewControllerDelegate{
+class ChatViewController: UIViewController{
+
+    var layerClient:LYRClient?
+    var conversation:LYRConversation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.dataSource = self
-//        self.delegate = self
+        fetchConversation()
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,34 +24,8 @@ class ChatViewController: ATLConversationViewController, ATLConversationViewCont
         // Dispose of any resources that can be recreated.
     }
     
-    func conversationViewController(conversationViewController: ATLConversationViewController!, participantForIdentifier participantIdentifier: String!) -> ATLParticipant! {
-        let participant = ChatParticipant()
-        if(participantIdentifier == nil){
-            return nil
-        }
-        if(participantIdentifier == "Robin"){
-            participant.firstName = "Robin"
-            participant.lastName = "DC"
-            participant.fullName = "Robin DC"
-            participant.avatarInitials = "R"
-            participant.participantIdentifier = "Robin"
-        }else{
-            participant.firstName = "Batman"
-            participant.lastName = "DC"
-            participant.fullName = "Batman DC"
-            participant.avatarInitials = "B"
-            participant.participantIdentifier = "Batman"
-        }
-        return participant
+    func fetchConversation(){
+        
     }
- 
-    func conversationViewController(conversationViewController: ATLConversationViewController!, attributedStringForDisplayOfDate date: NSDate!) -> NSAttributedString! {
-        return NSAttributedString(string: "\(date)")
-    }
-    
-    func conversationViewController(conversationViewController: ATLConversationViewController!, attributedStringForDisplayOfRecipientStatus recipientStatus: [NSObject : AnyObject]!) -> NSAttributedString! {
-        return NSAttributedString(string: "Received")
-    }
-    
     
 }

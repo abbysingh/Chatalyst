@@ -34,25 +34,26 @@ class ConversationViewController: UIViewController, LYRClientDelegate {
                     do{
                         self.defaultConversation = try self.layerClient?.newConversationWithParticipants(Set(arrayLiteral: self.userID!, self.participantID!), options: nil)
                         self.initializeConversationView()
-                    }catch _ {
-                        
+                    }catch let conversationError {
+                        print(conversationError)
                     }
                 })
             }
         })
         
     }
-
+    
     override func viewWillAppear(animated: Bool) {
         navigationController?.navigationBarHidden = false
     }
     
     override func viewDidDisappear(animated: Bool) {
-        layerClient?.deauthenticateWithCompletion(nil)
+//        layerClient?.deauthenticateWithCompletion(nil)
     }
     
     func initializeConversationView(){
-        let chatController = ChatViewController(layerClient: self.layerClient)
+        let chatController = ChatViewController()
+        chatController.layerClient = self.layerClient
         chatController.conversation = defaultConversation
         self.navigationController?.pushViewController(chatController, animated: true)
 //        chatController.view.bounds = conversationsContainer.bounds
