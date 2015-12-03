@@ -23,7 +23,6 @@ class ChatViewController: UIViewController, UITextFieldDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchConversation()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.separatorStyle = .None
@@ -34,14 +33,28 @@ class ChatViewController: UIViewController, UITextFieldDelegate, UITableViewData
     }
     func fetchMessages()
     {
-        thread?.refreshInBackgroundWithBlock({ (thread, error) -> Void in
-            self.thread = thread
-            PFObject.fetchAllIfNeededInBackground(thread!["messages"] as? [PFObject], block:
-                { (messages, error) -> Void in
-                    self.messages = messages as? [PFObject]
-                    self.tableView.reloadData()
-            })
+        
+        let relation = thread?.relationForKey("messages")
+        relation?.query().findObjectsInBackgroundWithBlock({ (messages, error) -> Void in
+            let descriptor = NSSortDescriptor(key: "createdAt", ascending: true)
+            let sortDescriptors = NSArray(object: descriptor)
+            let sorted = NSArray(array: messages!).sortedArrayUsingDescriptors(sortDescriptors as! [NSSortDescriptor])
+            self.messages = sorted as? [PFObject]
+            self.tableView.reloadData()
+            for message in messages!
+            {
+                print(message["messageString"])
+                print(message.createdAt)
+            }
         })
+//        thread?.refreshInBackgroundWithBlock({ (thread, error) -> Void in
+//            self.thread = thread
+//            PFObject.fetchAllIfNeededInBackground(thread!["messages"] as? [PFObject], block:
+//                { (messages, error) -> Void in
+//                    self.messages = messages as? [PFObject]
+//                    self.tableView.reloadData()
+//            })
+//        })
         
 
 
@@ -77,9 +90,6 @@ class ChatViewController: UIViewController, UITextFieldDelegate, UITableViewData
         composeTextField.resignFirstResponder()
     }
     
-    func fetchConversation(){
-        
-    }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -117,19 +127,17 @@ class ChatViewController: UIViewController, UITextFieldDelegate, UITableViewData
         let msg = PFObject(className: "Message")
         msg["messageString"] = self.composeTextField.text
         msg["sender"] = PFUser.currentUser()!["userID"] as! Int
-        msg["threadID"] = thread
-        var mutableThreadMessages = thread!["messages"] as! [PFObject]
-        mutableThreadMessages.append(msg)
-        thread!["messages"] = mutableThreadMessages
-        msg.saveInBackgroundWithBlock { (success, error) -> Void in
-            print(success)
-            do{
-                try self.thread?.save()
+        let threadRelation = msg.relationForKey("thread")
+        threadRelation.addObject(thread!)
+        let msgRelation = thread?.relationForKey("messages")
+        msgRelation?.addObject(msg)
+        msg.saveInBackgroundWithBlock { (completed, error) -> Void in
+            thread?.saveInBackgroundWithBlock({ (completed, error) -> Void in
+                print(error)
                 self.fetchMessages()
-            }catch _{
-                
-            }
+            })
         }
+        
     }
     
 }

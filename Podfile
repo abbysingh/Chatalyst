@@ -4,8 +4,8 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'Chatalyst' do
-  pod 'LayerKit'
-  pod 'JSQMessagesViewController'
-  pod 'Atlas'
-  pod 'Parse'
+    pod 'LayerKit'
+    pod 'JSQMessagesViewController'
+    pod 'Atlas'
+    pod 'Parse'
 end

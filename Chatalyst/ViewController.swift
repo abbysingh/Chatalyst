@@ -16,25 +16,47 @@ class ViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        let query = PFQuery(className: "Message")
-        query.findObjectsInBackgroundWithBlock
-        { (messages, error) -> Void in
-            print(messages)
-            let threadQuery = PFQuery(className: "Thread")
-            threadQuery.findObjectsInBackgroundWithBlock({ (threads, error) -> Void in
-                let mainThread = threads![0]
-                for message in messages!
-                {
-                    let relation = message.relationForKey("thread")
-                    relation.addObject(mainThread)
-                    message.saveInBackground()
-                }
-                
-            })
-            
-        }
+//        let query = PFQuery(className: "Message")
+//        query.findObjectsInBackgroundWithBlock
+//        { (messages, error) -> Void in
+//            print(messages)
+//            let threadQuery = PFQuery(className: "Thread")
+//            threadQuery.findObjectsInBackgroundWithBlock({ (threads, error) -> Void in
+//                let mainThread = threads![0]
+//                for message in messages!
+//                {
+//                    let relation = message.relationForKey("thread")
+//                    relation.addObject(mainThread)
+//                    message.saveInBackground()
+//                }
+//                
+//            })
+//            
+//        }
+        
+//        let specificMessageQuery = PFQuery(className: "Message")
+//        specificMessageQuery.whereKey("objectId", equalTo: "f9pf1TAyRq")
+//        specificMessageQuery.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+//            self.spawnThreadFromMessage(objects![0])
+//        }
         
 }
+    func spawnThreadFromMessage(message:PFObject)
+    {
+        let thread = PFObject(className: "Thread")
+        thread["participants"] = [1,2]
+        //no way to create copy of message in PFObject
+        let messageRelation = thread.relationForKey("messages")
+        messageRelation.addObject(message)
+        //^ is the "branching point - a message common to both threads
+        thread.saveInBackgroundWithBlock { (success, error) -> Void in
+            let spawnRelation = message.relationForKey("didSpawnThread")
+            spawnRelation.addObject(thread)
+            message.saveInBackground()
+        }
+        
+        
+    }
 
     @IBAction func abheyrajTapped(sender: AnyObject) {
         currentUser = "Batman"
